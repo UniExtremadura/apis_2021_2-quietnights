@@ -1,6 +1,6 @@
 {
   "name": "captacion",
-  "version": "1",
+  "version": "1.0.0",
   "description": "Api de Captación de Datos de Sensores",
   "main": "index.js",
   "scripts": {
