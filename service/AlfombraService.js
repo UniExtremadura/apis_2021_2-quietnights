@@ -11,7 +11,19 @@
  **/
 exports.addDatosAlfombra = function(body,idUsuario) {
   return new Promise(function(resolve, reject) {
+    var examples = {};
+    examples['application/json'] = [ {
+  "tiempo" : "25-04-2021 22:10:36",
+  "datoPresion" : 2000,
+  "idUsuario" : 1
+}, {
+  "tiempo" : "25-04-2021 22:10:36",
+  "datoPresion" : 2000,
+  "idUsuario" : 1
+} ];
+    if (Object.keys(examples).length > 0) {
+      resolve(examples[Object.keys(examples)[0]]);
+    } else {
     resolve();
   });
 }
-
