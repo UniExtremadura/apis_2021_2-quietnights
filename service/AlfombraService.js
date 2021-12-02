@@ -25,5 +25,6 @@ exports.addDatosAlfombra = function(body,idUsuario) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
     resolve();
+    }
   });
 }
