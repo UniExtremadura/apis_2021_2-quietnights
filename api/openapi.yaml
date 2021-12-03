@@ -196,11 +196,11 @@ paths:
       responses:
         "200":
           description: Datos de alfombra creados con éxito
-           content:
+          content:
             application/json:
               schema:
                 type: array
-                items:                  
+                items:
                   $ref: '#/components/schemas/DatosAlfombra'
                 x-content-type: application/json
         "400":
@@ -361,6 +361,10 @@ components:
           type: string
           example: 25-04-2021 22:10:36
       description: Registro con los datos del sensor de presión
+      example:
+        tiempo: 25-04-2021 22:10:36
+        idUsuario: 1
+        datoPresion: 2000
     DatosTodosSensores:
       required:
       - datoPresion
