@@ -1,0 +1,437 @@
+openapi: 3.0.0
+info:
+  title: Captacion
+  description: Api de Captación de Datos de Sensores
+  contact:
+    email: jmroblesg@alumnos.unex.es
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: "1.0.0"
+servers:
+- url: https://virtserver.swaggerhub.com/UEX-IST-G1/Captacion/v1.0.0
+  description: SwaggerHub API Auto Mocking
+tags:
+- name: salud
+  description: "Sensores de salud, frecuencia cardíaca, temperatura y oxígeno en sangre"
+- name: incorporacion
+  description: Sensor de posición del dispositivo de incorporación
+- name: alfombra
+  description: Sensor de presión de la alfombra
+- name: todo
+  description: devuelve la información de todos los sensores
+paths:
+  /frecuencia/{idUsuario}:
+    post:
+      tags:
+      - salud
+      summary: para guardar los datos de frecuencia cardíaca de un usuario
+      description: "Se incluyen sus datos en el sistema y se devuelve el objeto creado,\
+        \ incluído su id"
+      operationId: addDatosFrecuencia
+      parameters:
+      - name: idUsuario
+        in: path
+        description: Id del Usuario
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+          example: 1
+      requestBody:
+        description: Datos del sensor de Frecuencia carcíaca a insertar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatosFrecuencia'
+      responses:
+        "200":
+          description: Datos de frecuencia creados con éxito
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DatosFrecuencia'
+                x-content-type: application/json
+        "400":
+          description: "entrada incorrecta, object incorrecto"
+      x-swagger-router-controller: Salud
+  /oxigeno/{idUsuario}:
+    post:
+      tags:
+      - salud
+      summary: para guardar los datos de oxígeno en sangre de un usuario
+      description: "Se incluyen sus datos en el sistema y se devuelve el objeto creado,\
+        \ incluído su id"
+      operationId: addDatosOxigeno
+      parameters:
+      - name: idUsuario
+        in: path
+        description: Id del Usuario
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+          example: 1
+      requestBody:
+        description: Datos del sensor de Oxígeno en sangre a insertar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatosOxigeno'
+      responses:
+        "200":
+          description: Datos de oxigeno en sangre creados con éxito
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DatosOxigeno'
+                x-content-type: application/json
+        "400":
+          description: "entrada incorrecta, object incorrecto"
+      x-swagger-router-controller: Salud
+  /temperatura/{idUsuario}:
+    post:
+      tags:
+      - salud
+      summary: para guardar los datos de temperatura de un usuario
+      description: "Se incluyen sus datos en el sistema y se devuelve el objeto creado,\
+        \ incluído su id"
+      operationId: addDatosTemperatura
+      parameters:
+      - name: idUsuario
+        in: path
+        description: Id del Usuario
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+          example: 1
+      requestBody:
+        description: Datos del sensor de Temperatura a insertar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatosTemperatura'
+      responses:
+        "200":
+          description: Datos de temperatura creados con éxito
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DatosTemperatura'
+                x-content-type: application/json
+        "400":
+          description: "entrada incorrecta, object incorrecto"
+      x-swagger-router-controller: Salud
+  /incorporacion/{idUsuario}:
+    post:
+      tags:
+      - incorporacion
+      summary: para guardar los datos de incorporación de un usuario
+      description: "Se incluyen sus datos en el sistema y se devuelve el objeto creado,\
+        \ incluído su id"
+      operationId: addDatosIncorporacion
+      parameters:
+      - name: idUsuario
+        in: path
+        description: Id del Usuario
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+          example: 1
+      requestBody:
+        description: Datos del sensor de posición a insertar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatosIncorporacion'
+      responses:
+        "200":
+          description: Datos de incorporación creados con éxito
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DatosIncorporacion'
+                x-content-type: application/json
+        "400":
+          description: "entrada incorrecta, object incorrecto"
+      x-swagger-router-controller: Incorporacion
+  /alfombra/{idUsuario}:
+    post:
+      tags:
+      - alfombra
+      summary: para guardar los datos de presión de un usuario
+      description: "Se incluyen sus datos en el sistema y se devuelve el objeto creado,\
+        \ incluído su id"
+      operationId: addDatosAlfombra
+      parameters:
+      - name: idUsuario
+        in: path
+        description: Id del Usuario
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+          example: 1
+      requestBody:
+        description: Datos del sensor de posición a insertar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatosAlfombra'
+      responses:
+        "200":
+          description: Datos de alfombra creados con éxito
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DatosAlfombra'
+                x-content-type: application/json
+        "400":
+          description: "entrada incorrecta, object incorrecto"
+      x-swagger-router-controller: Alfombra
+  /todo/{idUsuario}/{tiempo1}/{tiempo2}:
+    get:
+      tags:
+      - todo
+      summary: para extraer la información de todos los sensores de un usuario en
+        un periodo de tiempo concreto
+      description: Indicando idUsuario se extraen los datos de todos los sensores
+        en un periodo de tiempo concreto entre tiempo1 y tiempo2
+      operationId: getTodoSensoresP
+      parameters:
+      - name: idUsuario
+        in: path
+        description: Id del Usuario
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+          example: 1
+      - name: tiempo1
+        in: path
+        description: identificación del tiempo inicial del periodo a buscar
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: 23-09-2021 08:00
+      - name: tiempo2
+        in: path
+        description: identificación del tiempo final del periodo a buscar
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: 23-09-2021 09:00
+      responses:
+        "200":
+          description: Todos los datos encontrados
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DatosTodosSensores'
+                x-content-type: application/json
+        "400":
+          description: "entrada incorrecta, object incorrecto"
+        "404":
+          description: el objeto no existe
+      x-swagger-router-controller: Todo
+components:
+  schemas:
+    DatosFrecuencia:
+      required:
+      - datoFrecuencia
+      - idUsuario
+      - tiempo
+      type: object
+      properties:
+        idUsuario:
+          type: number
+          example: 1
+        datoFrecuencia:
+          type: number
+          example: 78
+        tiempo:
+          type: string
+          example: 25-04-2021 22:10:36
+      description: Registro con los datos del sensor de frecuencia cardíaca
+      example:
+        tiempo: 25-04-2021 22:10:36
+        idUsuario: 1
+        datoFrecuencia: 78
+    DatosOxigeno:
+      required:
+      - datoOxigeno
+      - idUsuario
+      - tiempo
+      type: object
+      properties:
+        idUsuario:
+          type: number
+          example: 1
+        datoOxigeno:
+          type: number
+          example: 98
+        tiempo:
+          type: string
+          example: 25-04-2021 22:10:36
+      description: Registro con los datos del sensor de oxígeno en sangre
+      example:
+        tiempo: 25-04-2021 22:10:36
+        idUsuario: 1
+        datoOxigeno: 98
+    DatosTemperatura:
+      required:
+      - datoTemperatura
+      - idUsuario
+      - tiempo
+      type: object
+      properties:
+        idUsuario:
+          type: number
+          example: 1
+        datoTemperatura:
+          type: number
+          example: 36.6
+        tiempo:
+          type: string
+          example: 25-04-2021 22:10:36
+      description: Registro con los datos del sensor de temperatura
+      example:
+        datoTemperatura: 36.6
+        tiempo: 25-04-2021 22:10:36
+        idUsuario: 1
+    DatosIncorporacion:
+      required:
+      - datoPosicion
+      - idUsuario
+      - tiempo
+      type: object
+      properties:
+        idUsuario:
+          type: number
+          example: 1
+        datoPosicion:
+          type: number
+          example: 0
+        tiempo:
+          type: string
+          example: 25-04-2021 22:10:36
+      description: Registro con los datos del sensor de posición
+      example:
+        tiempo: 25-04-2021 22:10:36
+        datoPosicion: 0
+        idUsuario: 1
+    DatosAlfombra:
+      required:
+      - datoPresion
+      - idUsuario
+      - tiempo
+      type: object
+      properties:
+        idUsuario:
+          type: number
+          example: 1
+        datoPresion:
+          type: number
+          example: 2000
+        tiempo:
+          type: string
+          example: 25-04-2021 22:10:36
+      description: Registro con los datos del sensor de presión
+      example:
+        tiempo: 25-04-2021 22:10:36
+        idUsuario: 1
+        datoPresion: 2000
+    DatosTodosSensores:
+      required:
+      - datoPresion
+      - datosFrecuencia
+      - datosOxigeno
+      - datosPosicion
+      - datosTemperatura
+      - idUsuario
+      - tiempoFrecuencia
+      - tiempoOxigeno
+      - tiempoPosicion
+      - tiempoPresion
+      - tiempoTemperatura
+      type: object
+      properties:
+        idUsuario:
+          type: number
+          example: 1
+        datoFrecuencia:
+          type: number
+          example: 75
+        tiempoFrecuencia:
+          type: string
+          example: 25-04-2021 22:10:36
+        datoOxigeno:
+          type: number
+          example: 98
+        tiempoOxigeno:
+          type: string
+          example: 25-04-2021 22:10:36
+        datosTemperatura:
+          type: number
+          example: 36.6
+        tiempoTemperatura:
+          type: string
+          example: 25-04-2021 22:10:36
+        datoPosicion:
+          type: number
+          example: 0
+        tiempoPosicion:
+          type: string
+          example: 25-04-2021 22:10:36
+        datoPresion:
+          type: number
+          example: 2000
+        tiempoPresion:
+          type: string
+          example: 25-04-2021 22:10:36
+      description: Registro con los datos del sensor de presión
+      example:
+        tiempoPosicion: 25-04-2021 22:10:36
+        tiempoPresion: 25-04-2021 22:10:36
+        datosTemperatura: 36.6
+        datoPosicion: 0
+        idUsuario: 1
+        datoFrecuencia: 75
+        tiempoFrecuencia: 25-04-2021 22:10:36
+        tiempoTemperatura: 25-04-2021 22:10:36
+        tiempoOxigeno: 25-04-2021 22:10:36
+        datoPresion: 2000
+        datoOxigeno: 98
+  responses:
+    "404NotFound":
+      description: Not found response
+      content:
+        text/plain:
+          schema:
+            title: Endpoint not found
+            type: string
+            example: Not found
